@@ -15,7 +15,6 @@
     <div class="right">
       <div class="image">
         <img src="/header-person.png" alt="Dimitar Dimitrov" />
-        <p class="hire">{{ $t("hire") }}</p>
       </div>
     </div>
   </div>
@@ -65,6 +64,9 @@ const ageInYears = Math.floor(ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25)
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+.links a {
+  color: rgb(136, 129, 243);
 }
 
 .links a {

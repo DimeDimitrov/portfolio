@@ -1,24 +1,29 @@
 <template>
   <div class="project">
     <div class="left">
-      <h1 class="project-title">{{ props.title }}</h1>
-      <h2 v-if="props.subtitle" class="project-subtitle">{{ props.subtitle }}</h2>
+      <h3>{{ props.date }}</h3>
+      <a v-if="props.href" :href="props.href" class="title-href">{{ props.title }}</a>
+      <h1 v-else class="title">{{ props.title }}</h1>
+      <h2 v-if="props.subtitle" class="subtitle">{{ props.subtitle }}</h2>
+      <h3 class="description">{{ props.description }}</h3>
       <div class="tools">
-        <img v-for="tool in props.usedTools" :src="getToolSrc(tool)" :alt="tool" :title="tool" class="tools" />
+        <Icon v-for="tool in props.usedTools" :name="tool" :title="tool" size="48" class="tools" />
       </div>
     </div>
     <div class="right">
-      <img :src="props.image" alt="projectimage.png" />
+      <img class="image" :src="props.image" alt="projectimage.png" />
     </div>
   </div>
 </template>
 <script setup>
 const props = defineProps({
   title: String,
+  description: String,
   subtitle: {
     type: String,
     required: false,
   },
+  href: String,
   usedTools: Array,
   date: String,
   date_to: {
@@ -29,48 +34,43 @@ const props = defineProps({
   image: String,
   isOdd: Boolean,
 });
-
-const tools = [
-  {
-    name: "Vue.js",
-    src: "/tools/vue.png",
-  },
-  {
-    name: "React.js",
-    src: "/tools/react.png",
-  },
-];
-
-function getToolSrc(tool) {
-  return tools.find((t) => t.name === tool).src;
-}
 </script>
 <style scoped>
 .project {
-  width: 100%;
-  height: 50rem;
-  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20rem;
 }
-
-.project-title {
-  color: #3f4055;
-  font-size: 6rem;
-  margin-bottom: 10px;
-  text-align: center;
+.title-href {
+  font-size: 2rem;
+  color: white;
+  text-decoration: none;
 }
-
-.project-subtitle {
-  color: #666;
-  font-size: 18px;
-  margin-bottom: 10px;
+.title {
+  font-size: 2rem;
+  color: white;
 }
-
-.tools {
+.title-href:hover {
+  text-decoration: underline;
+  color: rgb(203, 190, 250);
+}
+.subtitle {
+  color: rgb(187, 187, 187);
+  font-size: 1rem;
+}
+.description {
+}
+.image {
+  width: 40rem;
+  margin: 40px 0;
+}
+/* .tools {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 2rem;
   width: auto;
   margin-top: 20px;
-}
+} */
 </style>
